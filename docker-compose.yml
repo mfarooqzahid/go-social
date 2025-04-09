@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: go-social-pg
+    environment:
+      - POSTGRES_DB=go-social
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=adminpassword
+
+    ports:
+      - "5432:5432"
+
+    networks:
+      - appnet
+
+  app:
+    build: .
+    container_name: go-social-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    networks:
+      - appnet
+
+
+
+networks:
+  appnet:
