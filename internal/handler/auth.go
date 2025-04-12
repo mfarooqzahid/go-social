@@ -36,11 +36,49 @@ func Login(c *fiber.Ctx) error {
 
 	res, err := services.LoginUser(c.Context(), loginRequest)
 
-	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"error": err.Error(),
+	if err.Error != nil {
+		return c.Status(err.StatusCode).JSON(fiber.Map{
+			"error": err.Error.Error(),
 		})
 	}
 
 	return c.Status(fiber.StatusOK).JSON(res)
+}
+
+func Signup(c *fiber.Ctx) error {
+	var signupRequest models.SignupRequest
+
+	if err := c.BodyParser(&signupRequest); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(
+			fiber.Map{
+				"error": "invalid request body",
+			},
+		)
+	}
+
+	if signupRequest.Email == "" || signupRequest.Password == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(
+			fiber.Map{
+				"error": "missing fields required",
+			},
+		)
+	}
+
+	if !utils.ValidateEmail(signupRequest.Email) {
+		return c.Status(fiber.StatusBadRequest).JSON(
+			fiber.Map{
+				"error": "email is not valid",
+			},
+		)
+	}
+
+	res, err := services.RegisterUser(c.Context(), signupRequest)
+
+	if err.Error != nil {
+		return c.Status(err.StatusCode).JSON(fiber.Map{
+			"error": err.Error.Error(),
+		})
+	}
+
+	return c.Status(fiber.StatusCreated).JSON(res)
 }

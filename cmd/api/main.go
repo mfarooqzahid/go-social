@@ -59,7 +59,7 @@ func main() {
 	log.Println("🚀 Server is running: ", addr)
 
 	<-stop
-	log.Println("🛑 Shutting down server...")
+	log.Println("🛑 Shutting down server..")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 

@@ -24,7 +24,7 @@ func ConnectDb() (*pgx.Conn, error) {
 
 	PGX = conn
 
-	log.Println("✅ Successfully coneected to database!")
+	log.Println("✅ Successfully conected to database!")
 
 	return conn, nil
 }

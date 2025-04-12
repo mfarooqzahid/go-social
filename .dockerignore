@@ -1,0 +1,18 @@
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Development artifacts
+tmp/
+.vscode/
+.idea/
+
+# Go build artifacts
+*.exe
+*.test
+*.prof

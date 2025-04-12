@@ -6,11 +6,12 @@ import (
 )
 
 func RegisterRoutes(app *fiber.App) {
-	apiv1 := app.Group("api/v1")
+	apiv1 := app.Group("/api")
 
 	auth := apiv1.Group("/auth")
 	{
 		auth.Post("/login", handler.Login)
+		auth.Post("/signup", handler.Signup)
 	}
 
 }

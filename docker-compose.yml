@@ -6,26 +6,35 @@ services:
       - POSTGRES_DB=go-social
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=adminpassword
-
     ports:
       - "5432:5432"
-
     networks:
       - appnet
-
-  app:
-    build: .
-    container_name: go-social-app
-    ports:
-      - "3000:3000"
     volumes:
-      - .:/app
-    depends_on:
-      - db
-    networks:
-      - appnet
+      - postgres_data:/var/lib/postgresql/data
+
+  # app:
+  #   build: .
+  #   container_name: go-social-app
+  #   environment:
+  #     - DB_HOST=db
+  #     - DB_PORT=5432
+  #     - DB_USER=admin
+  #     - DB_PASSWORD=adminpassword
+  #     - DB_NAME=go-social
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - .:/app
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - appnet
 
 
 
 networks:
   appnet:
+
+volumes:
+  postgres_data:
