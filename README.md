@@ -1,3 +1,4 @@
+```
 social-api/
 │
 ├── cmd/                    # Main application entry point(s)
@@ -36,6 +37,7 @@ social-api/
 ├── migrations/             # Optional: alias to internal/db/migrations for clarity
 │
 ├── .env                    # Environment variables
+```
 ├── Dockerfile              # Docker build config
 ├── docker-compose.yml      # Docker services (e.g., app + PostgreSQL)
 ├── go.mod                  # Go module file
